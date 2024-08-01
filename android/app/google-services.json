@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "92324621799",
+    "project_id": "university-fc3d9",
+    "storage_bucket": "university-fc3d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92324621799:android:c37678af27ee6dd4b52142",
+        "android_client_info": {
+          "package_name": "com.University.university_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdJJR4B2IMGPyTvRGv3QJmfSGlcdLHgi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
