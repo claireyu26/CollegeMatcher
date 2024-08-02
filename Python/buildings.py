@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import urllib.request
 import re 
 
+
+
 def getUniversityBuildings(university):
     if university=="Alliant International University":
         return AlliantBuildings()
