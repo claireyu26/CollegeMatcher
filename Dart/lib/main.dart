@@ -1,44 +1,79 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'splashScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-
-Future <void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();//added 5/26/24 w Patrick
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //added 5/26/24 w Patrick
   await Firebase.initializeApp();
   await dotenv.load(fileName: "images/.env");
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  // This widget is the root of your application.
+  WidgetsFlutterBinding.ensureInitialized();
+  final ThemeMode themeMode = await loadThemeFromPreferences();
+  runApp(MyApp(initialThemeMode: themeMode));
+}
+
+Future<ThemeMode> loadThemeFromPreferences() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String? theme = prefs.getString('themeMode');
+  switch (theme) {
+    case 'light':
+      return ThemeMode.light;
+    case 'dark':
+      return ThemeMode.dark;
+    default:
+      return ThemeMode.system;
+  }
+}
+class MyApp extends StatefulWidget {
+  final ThemeMode initialThemeMode;
+
+  MyApp({required this.initialThemeMode});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode;
+
+  _MyAppState() : _themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = widget.initialThemeMode;
+  }
+
+  void _saveThemeMode(ThemeMode themeMode) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String theme = 'system';
+    if (themeMode == ThemeMode.light) {
+      theme = 'light';
+    } else if (themeMode == ThemeMode.dark) {
+      theme = 'dark';
+    }
+    prefs.setString('themeMode', theme);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CollegeMatcher',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      debugShowCheckedModeBanner: false,
+      title: 'University Project',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: _themeMode,
+      home: splashScreen(
+        onThemeChanged: (ThemeMode themeMode) {
+          setState(() {
+            _themeMode = themeMode;
+            _saveThemeMode(themeMode);
+          });
+        },
       ),
-      home: const splashScreen(),
     );
   }
 }
-

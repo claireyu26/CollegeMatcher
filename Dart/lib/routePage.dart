@@ -1,51 +1,100 @@
 import 'package:flutter/material.dart';
+
+import 'favorites.dart';
 import 'homePage.dart';
 import 'recommendationPage.dart';
 
-//route page= bottom navigational
-class routePage extends StatefulWidget {//nothing much done here
-  const routePage({super.key});
+class routePage extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+
+  const routePage({super.key, required this.onThemeChanged});
 
   @override
   State<routePage> createState() => _routePageState();
 }
 
 class _routePageState extends State<routePage> {
-  int selectedIndex=0; //0=home, 1=recommendation page
+  int selectedIndex = 0;
   List<Widget>? widgetOptions;
+  List<String> titles = ['Home', 'Favorites', 'Recommendations'];
 
-  @override //overriding other function
+  @override
   void initState() {
-    //always runs at the very beginning of app opening
-    //starter code when the code that first runs when we first open app
-    super.initState(); // still run the code that was originally in initstate, the normal code before overridden
-    widgetOptions=[homePage(),recommendationPage()]; //create the home and rec widgets asap, so that theyre on the phone screen
+    super.initState();
+    widgetOptions = [
+      const homePage(),
+      const FavoritePage(),
+      recommendationPage(),
+    ];
   }
 
-  void widgetPressed(int index){ //void bc we're not returning anything, change selectedIndex to inputted index
-    setState(() { //"we made a change so update screen pls"
-      selectedIndex=index;
+  void widgetPressed(int index) {
+    setState(() {
+      selectedIndex = index;
     });
+  }
+
+  void _toggleTheme() {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      widget.onThemeChanged(ThemeMode.light);
+    } else {
+      widget.onThemeChanged(ThemeMode.dark);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body:Center(//sort of like we are staying on routepage 'forever' by having the nav bar there forever and only changing the top part of the screen
-        child: widgetOptions!.elementAt(selectedIndex), //goes into widgetOptions list and takes the selected index value (home or rec) just like widgetoptions[0]
-      //switches screen to the value of widgetoptions, ie home or rec
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: const Color.fromRGBO(129, 155, 218, 1.0),
+        toolbarHeight: 100,
+        title: Column(
+          children: [
+            SizedBox(
+              height: 60,
+              width: double.infinity,
+              child: Image.asset(
+                'images/university_logo.png',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text(
+                titles[selectedIndex],
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Theme.of(context).brightness == Brightness.dark
+                ? Icons.brightness_7
+                : Icons.brightness_2),
+            onPressed: _toggleTheme,
+          ),
+        ],
       ),
-      bottomNavigationBar: BottomNavigationBar( //generally anything after colon is capitalized
+      body: Center(
+        child: widgetOptions!.elementAt(selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(183, 188, 203, 1),
-        type: BottomNavigationBarType.fixed, //stay constant, no scrolling
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label:"Recommendations")
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: "Favorites"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.school), label: "Recommendations")
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Color.fromRGBO(74, 76, 82, 1),
-        onTap: widgetPressed,//function but no (), supposedly the above selectedIndex
-    ),
+        selectedItemColor: const Color.fromRGBO(255, 255, 255, 1),
+        onTap: widgetPressed,
+      ),
     );
   }
 }
