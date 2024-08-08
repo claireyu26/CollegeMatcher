@@ -83,7 +83,10 @@ class _routePageState extends State<routePage> {
         child: widgetOptions!.elementAt(selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromRGBO(183, 188, 203, 1),
+        //backgroundColor: Color.fromRGBO(183, 188, 203, 1),
+        //backgroundColor: Color.fromRGBO(170, 181, 187, 1),
+        backgroundColor: Color.fromRGBO(90, 116, 130,1),
+
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
