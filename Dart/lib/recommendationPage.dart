@@ -47,7 +47,17 @@ class _recommendationPageState extends State<recommendationPage> {
                 style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic),
+                  //  fontStyle: FontStyle.italic
+                ),
+              ),
+              SizedBox(height:20),
+              Text(
+                'Please do not input any personally identifiable information, such as your full name, address, or contact details.',
+                style: const TextStyle(
+                  fontSize: 15,
+                 // fontWeight: FontWeight.bold,
+                  //  fontStyle: FontStyle.italic
+                ),
               ),
               const SizedBox(height: 20),
               buildCurrentSection(),
@@ -132,7 +142,7 @@ class _recommendationPageState extends State<recommendationPage> {
 
     switch (currentIndex) {
       case 0:
-        title = 'Stats:';
+        title = 'Stats (GPA, standardized tests, academic or athletic statistics):';
         controllers = allControllers[currentIndex];
         break;
       case 1:
@@ -140,19 +150,19 @@ class _recommendationPageState extends State<recommendationPage> {
         controllers = allControllers[currentIndex];
         break;
       case 2:
-        title = 'Aspiring Major:';
+        title = 'Achievements and Awards:';
         controllers = allControllers[currentIndex];
         break;
       case 3:
-        title = 'Awards:';
+        title = 'Aspiring Major:';
         controllers = allControllers[currentIndex];
         break;
       case 4:
-        title = 'Specified Range Schools:';
+        title = 'Specified Range Schools (i.e. location, tuition):';
         controllers = allControllers[currentIndex];
         break;
       case 5:
-        title = 'Others:';
+        title = 'Other:';
         controllers = allControllers[currentIndex];
         break;
       default:

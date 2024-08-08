@@ -39,7 +39,7 @@ class _AllUniversityListState extends State<AllUniversityList> {
                 height: 60,
                 width: double.infinity,
                 child: Image.asset(
-                  'images/university_logo.png',
+                  'images/CollegeMatcher_logo.png',
                   fit: BoxFit.fitHeight,
                 ),
               ),

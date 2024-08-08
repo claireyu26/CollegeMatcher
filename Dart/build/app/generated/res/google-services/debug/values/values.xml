@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">92324621799</string>
+    <string name="google_api_key" translatable="false">AIzaSyAdJJR4B2IMGPyTvRGv3QJmfSGlcdLHgi4</string>
+    <string name="google_app_id" translatable="false">1:92324621799:android:c37678af27ee6dd4b52142</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAdJJR4B2IMGPyTvRGv3QJmfSGlcdLHgi4</string>
+    <string name="google_storage_bucket" translatable="false">university-fc3d9.appspot.com</string>
+    <string name="project_id" translatable="false">university-fc3d9</string>
+</resources>

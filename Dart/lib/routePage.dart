@@ -16,7 +16,7 @@ class routePage extends StatefulWidget {
 class _routePageState extends State<routePage> {
   int selectedIndex = 0;
   List<Widget>? widgetOptions;
-  List<String> titles = ['Home', 'Favorites', 'Recommendations'];
+  List<String> titles = ['Home', 'Favorites','Recommendations'];
 
   @override
   void initState() {
@@ -24,6 +24,7 @@ class _routePageState extends State<routePage> {
     widgetOptions = [
       const homePage(),
       const FavoritePage(),
+      //AllUniversityList(),
       recommendationPage(),
     ];
   }
@@ -56,7 +57,7 @@ class _routePageState extends State<routePage> {
               height: 60,
               width: double.infinity,
               child: Image.asset(
-                'images/university_logo.png',
+                'images/CollegeMatcher_logo.png',
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -88,6 +89,8 @@ class _routePageState extends State<routePage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: "Favorites"),
+        //  BottomNavigationBarItem(
+             // icon: Icon(Icons.search), label: "Search"),
           BottomNavigationBarItem(
               icon: Icon(Icons.school), label: "Recommendations")
         ],

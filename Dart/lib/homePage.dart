@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:university_project/allUniversityPage.dart';
+import 'package:university_project/universityDetails.dart';
 import 'package:university_project/yourRecommendation.dart';
-
+import 'universityDetails.dart';
 import 'db.dart';
 
 //5/19/24
@@ -21,15 +22,15 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-  // List trendingUniversities = [
-  //   "Alliant International University",
-  //   "American Jewish University",
-  //   "American University",
-  //   "Andrews University",
-  //   "ArtCenter College of Design",
-  //   "Bard College"
-  // ]; //add more later
-  // Map trendingUniversityInfo = {}; //a dictionary
+  List trendingUniversities = [
+    "Alliant International University",
+    "American Jewish University",
+    "American University",
+    "Andrews University",
+    "ArtCenter College of Design",
+    "Bard College"
+  ]; //add more later
+  Map trendingUniversityInfo = {}; //a dictionary
   Map allUniversityInfo =
   {}; //so we dont have to run db again fro the search page
   bool isLoading = true;
@@ -100,61 +101,61 @@ class _homePageState extends State<homePage> {
                         ))),
                   ),
                   SizedBox(height: 20,),
-                  // Card(
-                  //     child: SizedBox(
-                  //         height: height * 0.6,
-                  //         width: width * 0.9,
-                  //         child: ListView(
-                  //           physics: const ClampingScrollPhysics(), //scrolling
-                  //           children: [
-                  //             const Padding(
-                  //               padding: EdgeInsets.all(8),
-                  //               child: Text(
-                  //                 "Trending Universities",
-                  //                 style: TextStyle(
-                  //                     fontSize: 22,
-                  //                     color: Color.fromRGBO(
-                  //                         129, 155, 218, 1.0)),
-                  //               ),
-                  //             ), //Widget(modifier:...),
-                  //             Container(
-                  //               height: 5,
-                  //             ),
-                  //             ListView.builder(
-                  //               physics: const ClampingScrollPhysics(),
-                  //               shrinkWrap: true,
-                  //               itemCount: trendingUniversities.length,
-                  //               itemBuilder: (context, index) {
-                  //                 //index goes up to itemCount, itemBuilder="for loop", for loop doesn't make widgets but itemBuilder does
-                  //                 String university =
-                  //                     trendingUniversityInfo.keys
-                  //                         .elementAt(index);
-                  //                 return Padding(
-                  //                     padding: const EdgeInsets.all(8),
-                  //                     child: Card(
-                  //                         child: ListTile(
-                  //                       title: Text(university),
-                  //                       trailing: IconButton(
-                  //                         onPressed: () {
-                  //                           Navigator.push(
-                  //                               context,
-                  //                               MaterialPageRoute(
-                  //                                   builder: (BuildContext
-                  //                                           context) =>
-                  //                                       universityDetails(
-                  //                                           universityInfo:
-                  //                                               trendingUniversityInfo[
-                  //                                                   university],
-                  //                                           universityName:
-                  //                                               university)));
-                  //                         },
-                  //                         icon: const Icon(Icons.arrow_forward),
-                  //                       ),
-                  //                     )));
-                  //               }, //index is something to refer to like a for loop
-                  //             ),
-                  //           ],
-                  //         ))),
+                  Card(
+                      child: SizedBox(
+                          height: height * 0.6,
+                          width: width * 0.9,
+                          child: ListView(
+                            physics: const ClampingScrollPhysics(), //scrolling
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                  "Trending Universities",
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      color: Color.fromRGBO(
+                                          129, 155, 218, 1.0)),
+                                ),
+                              ), //Widget(modifier:...),
+                              Container(
+                                height: 5,
+                              ),
+                              ListView.builder(
+                                physics: const ClampingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: trendingUniversities.length,
+                                itemBuilder: (context, index) {
+                                  //index goes up to itemCount, itemBuilder="for loop", for loop doesn't make widgets but itemBuilder does
+                                  String university =
+                                      trendingUniversityInfo.keys
+                                          .elementAt(index);
+                                  return Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Card(
+                                          child: ListTile(
+                                        title: Text(university),
+                                        trailing: IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        universityDetails(
+                                                            universityInfo:
+                                                                trendingUniversityInfo[
+                                                                    university],
+                                                            universityName:
+                                                                university)));
+                                          },
+                                          icon: const Icon(Icons.arrow_forward),
+                                        ),
+                                      )));
+                                }, //index is something to refer to like a for loop
+                              ),
+                            ],
+                          ))),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(

@@ -39,7 +39,7 @@ class _splashScreenState extends State<splashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'images/university_logo.png', //images are not const
+          'images/CollegeMatcher_logo.png', //images are not const
           height: 300.0,
         ),
       ),
