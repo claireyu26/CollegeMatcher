@@ -45,10 +45,10 @@ class _homePageState extends State<homePage> {
   void getUniversities() {
     getData().then((value) {
       //.then says wait for getData to get values then do the after things
-      // for (String university in trendingUniversities) {
-      //   trendingUniversityInfo[university] =
-      //       value[university]; //puts the db info into a map
-      // }
+      for (String university in trendingUniversities) {
+        trendingUniversityInfo[university] =
+            value[university]; //puts the db info into a map
+      }
       setState(() {
         allUniversityInfo = value;
         isLoading = false;
@@ -81,7 +81,7 @@ class _homePageState extends State<homePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                        height: height * 0.6,
+                        height: height * 0.35,
                         child: Card(child: ListView(
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,
@@ -103,7 +103,7 @@ class _homePageState extends State<homePage> {
                   SizedBox(height: 20,),
                   Card(
                       child: SizedBox(
-                          height: height * 0.6,
+                          height: height * 0.35,
                           width: width * 0.9,
                           child: ListView(
                             physics: const ClampingScrollPhysics(), //scrolling
