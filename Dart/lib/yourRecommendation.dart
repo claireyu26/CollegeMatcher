@@ -29,8 +29,8 @@ class _YourRecommendationState extends State<YourRecommendation> {
   String keySharePref = "seen";
 
   @override
+  @override
   void initState() {
-    univData();
     super.initState(); //runs the normal function
     _openAI = OpenAI.instance.build(
         token: dotenv.env['OpenAI-key'],
@@ -38,18 +38,22 @@ class _YourRecommendationState extends State<YourRecommendation> {
             receiveTimeout: Duration(
                 seconds:
                     30))); //timeout if it takes longer than 30 sec to receive anwser
-    seenPlace(keySharePref).then((universities) {
-      if (universities.isEmpty) {
-        //Randomly pick 10 universities from the list
-        List tempUniversities = allUniversityInfo.keys.toList()..shuffle();
-        tempUniversities = tempUniversities.sublist(0, 10);
-        for (String university in tempUniversities) {
-          _result.add({
-            "name": university,
-          });
+    univData().then((value) {
+      seenPlace(keySharePref).then((universities) {
+        if (universities.isEmpty) {
+          //Randomly pick 10 universities from the list
+          // print(allUniversityInfo);
+          List tempUniversities = allUniversityInfo.keys.toList()..shuffle();
+          // print(allUniversityInfo.keys);
+          tempUniversities = tempUniversities.sublist(0, 10);
+          for (String university in tempUniversities) {
+            _result.add({
+              "name": university,
+            });
+          }
         }
-      }
-      chatGPTCall(universities);
+        chatGPTCall(universities);
+      });
     });
   }
 
@@ -69,7 +73,7 @@ class _YourRecommendationState extends State<YourRecommendation> {
                     onPressed: () {
                       Navigator.of(context)
                           .pop(); //pop = go back to previous page
-                      Navigator.of(context).pop();
+
                     },
                     //first .pop gets out of alert dialogue, second goes back to stats
                     child: Text("OK"))
@@ -132,14 +136,15 @@ class _YourRecommendationState extends State<YourRecommendation> {
   Widget build(BuildContext context) {
     // print(_result);
     return isLoading
-        ? Center(child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            CircularProgressIndicator(),
-          ],
-        )) //? means isLoading is true
+        ? Center(
+            child: Column(
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              CircularProgressIndicator(),
+            ],
+          )) //? means isLoading is true
         : ListView.builder(
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
