@@ -4,11 +4,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class buildingImage extends StatefulWidget {
   const buildingImage(
       {Key? key,
-        required this.university,
-        required this.buildingName,
-        required this.images,
-        required this.latitude,
-        required this.longitude})
+      required this.university,
+      required this.buildingName,
+      required this.images,
+      required this.latitude,
+      required this.longitude})
       : super(key: key);
 
   final String buildingName;
@@ -33,21 +33,25 @@ class _buildingImageState extends State<buildingImage> {
       body: Column(
         children: [
           widget.images != "There are no images available."
-              ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.network(widget.images, height: 200),
-          )
-              : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-                height: 200,
-                child: Card(
-                    color: Color.fromRGBO(107, 153, 222, 1.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("There are no images available."),
-                    ))),
-          ),
+              ? Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(widget.images, height: 200),
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                        height: 200,
+                        child: Card(
+                            color: Color.fromRGBO(107, 153, 222, 1.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("There are no images available."),
+                            ))),
+                  ),
+                ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -55,27 +59,31 @@ class _buildingImageState extends State<buildingImage> {
               style: TextStyle(fontSize: 25),
             ),
           ),
-          // Expanded(
-          //   child: GoogleMap(
-          //     initialCameraPosition: CameraPosition(
-          //       target: LatLng(widget.latitude, widget.longitude),
-          //       zoom: 15.0,
-          //     ),
-          //     markers: {
-          //       Marker(
-          //         markerId: MarkerId(widget.buildingName),
-          //         position: LatLng(widget.latitude, widget.longitude),
-          //         infoWindow: InfoWindow(
-          //           title: widget.buildingName,
-          //           snippet: widget.university,
-          //         ),
-          //       ),
-          //     },
-          //     onMapCreated: (GoogleMapController controller) {
-          //       mapController = controller;
-          //     },
-          //   ),
-          // ),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.latitude, widget.longitude),
+                  zoom: 15.0,
+                ),
+                markers: {
+                  Marker(
+                    markerId: MarkerId(widget.buildingName),
+                    position: LatLng(widget.latitude, widget.longitude),
+                    infoWindow: InfoWindow(
+                      title: widget.buildingName,
+                      snippet: widget.university,
+                    ),
+                  ),
+                },
+                onMapCreated: (GoogleMapController controller) {
+                  mapController = controller;
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
