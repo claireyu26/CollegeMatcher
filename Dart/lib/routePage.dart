@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'allUniversityPage.dart';
+import 'db.dart';
 import 'favorites.dart';
 import 'homePage.dart';
 import 'recommendationPage.dart';
@@ -16,18 +18,21 @@ class routePage extends StatefulWidget {
 class _routePageState extends State<routePage> {
   int selectedIndex = 0;
   List<Widget>? widgetOptions;
-  List<String> titles = ['Home', 'Favorites','Recommendations'];
+  List<String> titles = ['Home', 'Favorites', 'Search', 'Recommendations'];
 
   @override
   void initState() {
     super.initState();
+
     widgetOptions = [
       const homePage(),
       const FavoritePage(),
-      //AllUniversityList(),
+      AllUniversityList(universities: {}),
       recommendationPage(),
     ];
   }
+
+
 
   void widgetPressed(int index) {
     setState(() {
@@ -46,7 +51,7 @@ class _routePageState extends State<routePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: selectedIndex != 2?AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: const Color.fromRGBO(129, 155, 218, 1.0),
@@ -78,22 +83,21 @@ class _routePageState extends State<routePage> {
             onPressed: _toggleTheme,
           ),
         ],
-      ),
+      ):null,
       body: Center(
         child: widgetOptions!.elementAt(selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         //backgroundColor: Color.fromRGBO(183, 188, 203, 1),
         //backgroundColor: Color.fromRGBO(170, 181, 187, 1),
-        backgroundColor: Color.fromRGBO(90, 116, 130,1),
+        backgroundColor: Color.fromRGBO(90, 116, 130, 1),
 
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: "Favorites"),
-        //  BottomNavigationBarItem(
-             // icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
           BottomNavigationBarItem(
               icon: Icon(Icons.school), label: "Recommendations")
         ],
