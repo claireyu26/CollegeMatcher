@@ -85,7 +85,6 @@ CollegeMatcher/
 ├── Dart/                 # Flutter frontend application
 ├── Python/               # Backend scripts (web scraping, API integration)
 ├── metadata/             # Supporting project metadata
-├── CMakeLists.txt
 ├── .gitignore
 └── README.md
 ```
@@ -155,5 +154,3 @@ Planned and proposed improvements include:
 This project is open source. See the repository license for details.
 
 ---
-
-* Help you write a **methods.md** or **architecture.md** for reviewers or judges
